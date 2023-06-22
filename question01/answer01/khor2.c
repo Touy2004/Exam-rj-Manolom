@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include <stdbool.h>
 
 void calculateScore(int mathScore, int physicScore, int laoLangScore, int kmeScore);
-void handleError(char firstName[100], char lastName[100], int id, int *mathScore, int *physicScore, int *laoLangScore, int *kmeScore);
+void display(char firstName[100], char lastName[100], int id, int mathScore, int physicScore, int laoLangScore, int kmeScore);
 char calculateGrade(int totalScore);
+void handleError(char firstName[100], char lastName[100], int id, int *mathScore, int *physicScore, int *laoLangScore, int *kmeScore);
 
-void main()
+int main()
 {
     char firstName[100], lastName[100];
     int id, mathScore, laoLangScore, physicScore, kmeScore;
@@ -30,6 +30,11 @@ void main()
 
     handleError(firstName, lastName, id, &mathScore, &laoLangScore, &physicScore, &kmeScore);
 
+    return 0;
+}
+
+void display(char firstName[100], char lastName[100], int id, int mathScore, int physicScore, int laoLangScore, int kmeScore)
+{
     printf("\nYour Information\n\n");
     printf("id: %d\n", id);
     printf("first name: %s\n", firstName);
@@ -42,8 +47,6 @@ void main()
     printf("kme score: %d\n\n", kmeScore);
 
     calculateScore(mathScore, laoLangScore, physicScore, kmeScore);
-
-
 }
 
 void calculateScore(int mathScore, int physicScore, int laoLangScore, int kmeScore)
@@ -84,18 +87,23 @@ char calculateGrade(int totalScore)
 
 void handleError(char firstName[100], char lastName[100], int id, int *mathScore, int *physicScore, int *laoLangScore, int *kmeScore)
 {
-    bool errorFlag = false;
+    int errorFlag = 0;
 
-    if (*mathScore < 0 || *mathScore > 20 ||
-        *physicScore < 0 || *physicScore > 20 ||
-        *laoLangScore < 0 || *laoLangScore > 20 ||
-        *kmeScore < 0 || *kmeScore > 20)
+    if ((*mathScore < 0 || *mathScore > 20) ||
+        (*physicScore < 0 || *physicScore > 20) ||
+        (*laoLangScore < 0 || *laoLangScore > 20) ||
+        (*kmeScore < 0 || *kmeScore > 20))
     {
         printf("Your score should be between 0 and 20. Please input a new score.\n");
-        errorFlag = true;
+        errorFlag = 1;
     }
 
-    if (errorFlag) {
+    if (errorFlag == 1)
+    {
         printf("Try inputting again and ensure that the scores are within the valid range.\n");
+    }
+    else
+    {
+        display(firstName, lastName, id, *mathScore, *laoLangScore, *physicScore, *kmeScore);
     }
 }
