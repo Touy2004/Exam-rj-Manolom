@@ -1,10 +1,10 @@
 #include <stdio.h>
 
 void calculateScore(int mathScore, int physicScore, int laoLangScore, int kmeScore);
-void handleError(int mathScore, int physicScore, int laoLangScore, int kmeScore);
+void handleError(char firstName[100], char lastName[100], int id, int mathScore, int physicScore, int laoLangScore, int kmeScore);
 char calculateGrade(int totalScore);
 
-int main()
+void main()
 {
     char firstName[100], lastName[100];
     int id, mathScore, laoLangScore, physicScore, kmeScore;
@@ -42,7 +42,6 @@ int main()
 
     calculateScore(mathScore, laoLangScore, physicScore, kmeScore);
 
-    return 0;
 }
 
 void calculateScore(int mathScore, int physicScore, int laoLangScore, int kmeScore)
