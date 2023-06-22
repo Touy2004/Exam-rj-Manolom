@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 void calculateScore(int mathScore, int physicScore, int laoLangScore, int kmeScore);
-void handleError(char firstName[100], char lastName[100], int id, int mathScore, int physicScore, int laoLangScore, int kmeScore);
+void handleError(char firstName[100], char lastName[100], int id, int *mathScore, int *physicScore, int *laoLangScore, int *kmeScore);
 char calculateGrade(int totalScore);
 
 void main()
@@ -27,7 +28,7 @@ void main()
     printf("Input your kme score: ");
     scanf("%d", &kmeScore);
 
-    handleError(firstName, lastName, id, mathScore, laoLangScore, physicScore, kmeScore);
+    handleError(firstName, lastName, id, &mathScore, &laoLangScore, &physicScore, &kmeScore);
 
     printf("\nYour Information\n\n");
     printf("id: %d\n", id);
@@ -41,6 +42,7 @@ void main()
     printf("kme score: %d\n\n", kmeScore);
 
     calculateScore(mathScore, laoLangScore, physicScore, kmeScore);
+
 
 }
 
@@ -80,54 +82,20 @@ char calculateGrade(int totalScore)
     }
 }
 
-void handleError(char firstName[100], char lastName[100], int id, int mathScore, int physicScore, int laoLangScore, int kmeScore)
+void handleError(char firstName[100], char lastName[100], int id, int *mathScore, int *physicScore, int *laoLangScore, int *kmeScore)
 {
-    int errorFlag = 0;
+    bool errorFlag = false;
 
-    if (scanf("%s", &firstName) != 1) {
-        printf("Invalid input for math score. Please enter a valid String range 1 to 100 Charecter.\n");
-        errorFlag = 1;
-    }
-    
-    if (scanf("%s", &lastName) != 1) {
-        printf("Invalid input for math score. Please enter a valid String range 1 to 100 Charecter.\n");
-        errorFlag = 1;
-    }
-
-    if (scanf("%d", &id) != 1) {
-        printf("Invalid input for math score. Please enter a valid integer.\n");
-        errorFlag = 1;
-    }
-
-    if (scanf("%d", &mathScore) != 1) {
-        printf("Invalid input for math score. Please enter a valid integer.\n");
-        errorFlag = 1;
-    }
-
-    if (scanf("%d", &physicScore) != 1) {
-        printf("Invalid input for physics score. Please enter a valid integer.\n");
-        errorFlag = 1;
-    }
-
-    if (scanf("%d", &laoLangScore) != 1) {
-        printf("Invalid input for Lao language score. Please enter a valid integer.\n");
-        errorFlag = 1;
-    }
-
-    if (scanf("%d", &kmeScore) != 1) {
-        printf("Invalid input for kme score. Please enter a valid integer.\n");
-        errorFlag = 1;
+    if (*mathScore < 0 || *mathScore > 20 ||
+        *physicScore < 0 || *physicScore > 20 ||
+        *laoLangScore < 0 || *laoLangScore > 20 ||
+        *kmeScore < 0 || *kmeScore > 20)
+    {
+        printf("Your score should be between 0 and 20. Please input a new score.\n");
+        errorFlag = true;
     }
 
     if (errorFlag) {
-        printf("Try Input again and check data type of your variables");
-    }
-
-    if (mathScore < 0 || mathScore > 20 ||
-        physicScore < 0 || physicScore > 20 ||
-        laoLangScore < 0 || laoLangScore > 20 ||
-        kmeScore < 0 || kmeScore > 20)
-    {
-        printf("Your score should be between 0 and 20. Please input a new score.\n");
+        printf("Try inputting again and ensure that the scores are within the valid range.\n");
     }
 }
