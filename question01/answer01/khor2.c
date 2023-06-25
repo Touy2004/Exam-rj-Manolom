@@ -5,10 +5,10 @@ void display(char firstName[100], char lastName[100], int id, int mathScore, int
 char calculateGrade(int totalScore);
 void handleError(char firstName[100], char lastName[100], int id, int *mathScore, int *physicScore, int *laoLangScore, int *kmeScore);
 
-int main()
+void main()
 {
     char firstName[100], lastName[100];
-    int id, mathScore, laoLangScore, physicScore, kmeScore;
+    int id, mathScore, laoLangScore, physicScore, kmeScore, ຫັດເເຕ່ງ;
 
     printf("Input your Information\n\n");
     printf("Input your id student: ");
@@ -30,7 +30,6 @@ int main()
 
     handleError(firstName, lastName, id, &mathScore, &laoLangScore, &physicScore, &kmeScore);
 
-    return 0;
 }
 
 void display(char firstName[100], char lastName[100], int id, int mathScore, int physicScore, int laoLangScore, int kmeScore)
