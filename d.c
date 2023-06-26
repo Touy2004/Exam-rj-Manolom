@@ -17,8 +17,6 @@ void main()
     scanf("%d", &OT);
     printf("suport employee: ");
     scanf("%d", &suport);
-    printf("tax percent: ");
-    scanf("%d", &tax_percent);
     // calculate salary
     int total_salary = salary_employ + OT + suport;
     int after_tax = total_salary - ((tax_percent * total_salary) / 100);
@@ -31,4 +29,10 @@ void main()
     printf("suport employee: %d\n", suport);
     printf("Total: %d\n", total_salary);
     printf("After tax: %d\n", after_tax);
+
+    if(total_salary > 1000000){
+        printf("Your total salary: %d\n", after_tax);
+    }else{
+        printf("Your total salary: %d\n", total_salary);
+    }
 }
